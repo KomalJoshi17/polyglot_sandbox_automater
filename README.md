@@ -383,7 +383,7 @@ git clone <your-repository-url>
 ## Windows Git Bash
 
 ```bash
-cd /e/SEM_6/cipher/polyglot-sandbox-automator
+cd polyglot-sandbox-automator
 ```
 
 ---
@@ -479,12 +479,21 @@ Potential future enhancements:
 
 # Screenshots
 
-Add screenshots of:
+## Docker Compose Running
 
-- Docker Compose running
-- Successful API execution
-- manage.sh automation
-- VS Code project structure
+![Docker Compose](screenshots/docker-compose.png)
+
+## API Execution Test
+
+![API Test](screenshots/api-test.png)
+
+## manage.sh Test
+
+![Manage Script](screenshots/manage-test.png)
+
+## Project Structure
+
+![Project Structure](screenshots/project-structure.png)
 
 ---
 
