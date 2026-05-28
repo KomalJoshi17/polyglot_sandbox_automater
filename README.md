@@ -1,136 +1,296 @@
-# Polyglot Sandbox Automator
+# 🚀 Polyglot Sandbox Automator — PSA-2 DevOps CI/CD Project
 
-A containerized, automated, multi-language code execution platform inspired by online coding environments like LeetCode and Replit.
+## 📌 Project Overview
 
-This project provides a secure sandboxed environment to execute untrusted Python and JavaScript code inside isolated Docker containers using a TypeScript REST API.
+Polyglot Sandbox Automator is a containerized automated code-execution platform inspired by systems like LeetCode and Replit.
+It allows users to execute code securely inside isolated Docker containers using a TypeScript REST API.
 
----
+This PSA-2 iteration extends the previous project by implementing a complete DevOps CI/CD pipeline using:
 
-# Features
+* Jenkins
+* Terraform
+* Ansible
+* Docker
+* SonarQube
+* Nexus Repository
+* AWS EC2
+* DockerHub
 
-- Multi-language code execution
-  - Python
-  - JavaScript (Node.js)
-
-- TypeScript REST API
-  - `POST /execute`
-  - Dynamic language handling
-  - Output capture
-
-- Docker-based sandbox execution
-  - Isolated runner containers
-  - Ephemeral execution containers
-  - Shared Docker volume support
-
-- Security Best Practices
-  - Non-root users inside containers
-  - CPU limits
-  - Memory limits
-  - Automatic container cleanup
-
-- Docker Compose orchestration
-  - API container
-  - Redis container
-  - Shared networking
-
-- Automation using Bash
-  - setup
-  - build
-  - test
-  - clean
-  - logs
-
-- Redis integration
-  - Ready for caching and rate limiting extensions
-
-- Git commit-based Docker image tagging
+The project demonstrates Infrastructure as Code (IaC), CI/CD automation, container orchestration, artifact management, and secure cloud deployment.
 
 ---
 
-# Tech Stack
+# 📌 Features
 
-| Technology | Purpose |
-|---|---|
-| Node.js | Backend runtime |
-| TypeScript | API development |
-| Express.js | REST API |
-| Docker | Containerization |
-| Docker Compose | Service orchestration |
-| Redis | Caching / scalability |
-| Bash | Automation scripts |
-| Python | Sandbox execution language |
-| Node.js Runtime | JavaScript execution |
+* ✅ TypeScript REST API (`POST /execute`)
+* ✅ Secure isolated Python & Node.js execution runners
+* ✅ Docker containerization
+* ✅ Docker Compose orchestration
+* ✅ Jenkins CI/CD Pipeline
+* ✅ GitHub Poll SCM Automation
+* ✅ SonarQube Static Code Analysis
+* ✅ Quality Gate Enforcement
+* ✅ Terraform-based AWS Infrastructure Provisioning
+* ✅ Ansible-based Environment Setup
+* ✅ Nexus Artifact Repository Integration
+* ✅ DockerHub Image Publishing
+* ✅ AWS EC2 Deployment with Elastic IP
+* ✅ Non-root secure execution containers
+* ✅ Resource-limited sandbox execution
 
 ---
 
-# Project Architecture
+# 🏗️ System Architecture
 
 ```text
-                User
-                  ↓
-          POST /execute
-                  ↓
-         TypeScript REST API
-                  ↓
-          Docker API Container
-                  ↓
-      Shared Docker Volume
-                  ↓
-      Runner Containers
-       ↓             ↓
- Python Runner   Node Runner
-       ↓             ↓
-   Code Output Returned
+Developer Pushes Code → GitHub Repository
+                ↓
+        Jenkins Poll SCM Trigger
+                ↓
+          Checkout Source Code
+                ↓
+          SonarQube Code Scan
+                ↓
+          Quality Gate Check
+                ↓
+          Docker Image Build
+                ↓
+ ┌───────────────────────────────┐
+ │                               │
+ ↓                               ↓
+Push to DockerHub         Push to Nexus
+ │                               │
+ └──────────────┬────────────────┘
+                ↓
+         Deploy on AWS EC2
+                ↓
+      Containerized Application
 ```
 
 ---
 
-# Project Structure
+# 📂 Project Structure
 
 ```text
 polyglot-sandbox-automator/
 │
+├── src/                    # TypeScript REST API
+├── scripts/                # Automation scripts
 ├── containers/
-│   ├── api/
-│   │   └── Dockerfile
-│   │
-│   ├── python/
-│   │   └── Dockerfile
-│   │
-│   └── nodejs/
-│       └── Dockerfile
+│   ├── api/                # API Dockerfile
+│   ├── python/             # Python runner Dockerfile
+│   └── nodejs/             # Node.js runner Dockerfile
 │
-├── scripts/
-│   └── manage.sh
-│
-├── src/
-│   └── server.ts
-│
-├── temp/
-│
+├── terraform/              # Terraform IaC files
+├── ansible/                # Ansible playbooks
+├── Jenkinsfile             # Jenkins CI/CD Pipeline
 ├── docker-compose.yml
-├── package.json
-├── tsconfig.json
+├── sonar-project.properties
 └── README.md
 ```
 
 ---
 
-# How It Works
+# ⚙️ Technologies Used
 
-1. User sends code using the `/execute` API.
-2. The API receives the language and source code.
-3. Code is temporarily written into a shared Docker volume.
-4. The API launches an isolated Docker runner container.
-5. The runner executes the code securely.
-6. Output is captured and returned to the user.
-7. The execution container is automatically removed.
+| Category                 | Technologies           |
+| ------------------------ | ---------------------- |
+| Programming              | TypeScript, Node.js    |
+| Containerization         | Docker, Docker Compose |
+| CI/CD                    | Jenkins                |
+| IaC                      | Terraform              |
+| Configuration Management | Ansible                |
+| Code Quality             | SonarQube              |
+| Artifact Repository      | Sonatype Nexus         |
+| Cloud Platform           | AWS EC2                |
+| Version Control          | Git & GitHub           |
 
 ---
 
-# API Endpoint
+# ☁️ AWS Infrastructure Provisioning (Terraform)
 
-## Execute Code
+Terraform was used to automate:
+
+* EC2 instance creation
+* Elastic IP allocation
+* Infrastructure provisioning
+
+### Terraform Features
+
+* Infrastructure as Code
+* Automated EC2 deployment
+* Elastic IP management
+* Reproducible infrastructure
+
+### Commands Used
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+---
+
+# 🛠️ Environment Setup (Ansible)
+
+Ansible was used for automated environment configuration.
+
+### Automated Tasks
+
+* Docker installation
+* Package updates
+* Service management
+
+### Command Used
+
+```bash
+ansible-playbook -i inventory.ini playbook.yml --private-key ~/.ssh/psa2-key.pem
+```
+
+---
+
+# 🐳 Docker Containerization
+
+The project is fully containerized.
+
+### Containers Used
+
+* API Container
+* Python Runner
+* Node.js Runner
+* Redis
+* Nexus Repository
+* SonarQube
+
+### Security Best Practices
+
+* Non-root containers
+* Resource limits
+* Ephemeral execution
+* Automatic cleanup
+
+---
+
+# 🔄 Jenkins CI/CD Pipeline
+
+A complete Jenkins pipeline was implemented.
+
+## Pipeline Stages
+
+### 1. Checkout
+
+Fetches source code from GitHub.
+
+### 2. SonarQube Scan
+
+Performs static code analysis.
+
+### 3. Quality Gate
+
+Stops pipeline if quality gate fails.
+
+### 4. Docker Build
+
+Builds production Docker image.
+
+### 5. Push DockerHub
+
+Publishes image publicly.
+
+### 6. Push Nexus
+
+Publishes image to Nexus artifact repository.
+
+### 7. Deploy
+
+Deploys application container automatically.
+
+---
+
+# 🔍 SonarQube Integration
+
+SonarQube was integrated with Jenkins for:
+
+* Static code analysis
+* Code smell detection
+* Security vulnerability scanning
+* Quality Gate validation
+
+### Quality Gate
+
+The pipeline automatically proceeds only if:
+
+* No major issues
+* Quality threshold passes
+
+---
+
+# 📦 Nexus Repository Integration
+
+Sonatype Nexus was configured as:
+
+* Docker hosted repository
+* Artifact management system
+
+### Features
+
+* Docker image hosting
+* Artifact versioning
+* Centralized storage
+
+---
+
+# 🌐 DockerHub Image
+
+Public Docker image:
+
+```text
+https://hub.docker.com/r/komaljoshi17/polyglot-sandbox-automator
+```
+
+---
+
+# 💻 GitHub Repository
+
+Public GitHub repository:
+
+```text
+https://github.com/KomalJoshi17/polyglot_sandbox_automater
+```
+
+---
+
+# 🚀 Running the Project Locally
+
+## Clone Repository
+
+```bash
+git clone https://github.com/KomalJoshi17/polyglot_sandbox_automater.git
+cd polyglot_sandbox_automater
+```
+
+---
+
+## Docker Compose
+
+```bash
+docker-compose up --build
+```
+
+---
+
+## Access API
+
+```text
+http://localhost:3000
+```
+
+---
+
+# 🧪 API Example
+
+## Execute Python Code
 
 ### Endpoint
 
@@ -138,11 +298,7 @@ polyglot-sandbox-automator/
 POST /execute
 ```
 
----
-
-## Request Body
-
-### Python Example
+### Request
 
 ```json
 {
@@ -151,18 +307,7 @@ POST /execute
 }
 ```
 
-### JavaScript Example
-
-```json
-{
-  "language": "javascript",
-  "code": "console.log('Hello JS')"
-}
-```
-
----
-
-## Sample Response
+### Response
 
 ```json
 {
@@ -172,343 +317,69 @@ POST /execute
 
 ---
 
-# Security Features
+# 🔐 Security Measures
 
-This project demonstrates several important sandbox security practices.
-
-## 1. Non-root Container Execution
-
-Runner containers use dedicated non-root users.
-
-```dockerfile
-USER sandboxuser
-```
-
-This prevents executed code from gaining elevated privileges.
+* Non-root Docker containers
+* Resource-limited execution
+* Temporary file cleanup
+* Isolated runner containers
+* Secure deployment workflow
 
 ---
 
-## 2. Ephemeral Containers
+# 📊 DevOps Workflow
 
-Containers are automatically deleted after execution.
-
-```bash
-docker run --rm
-```
-
-Benefits:
-- No leftover containers
-- Reduced storage usage
-- Better security isolation
-
----
-
-## 3. CPU Limits
-
-```bash
---cpus=0.5
-```
-
-Prevents excessive CPU consumption.
+| Tool      | Purpose                     |
+| --------- | --------------------------- |
+| GitHub    | Source Control              |
+| Jenkins   | CI/CD Automation            |
+| SonarQube | Code Quality Analysis       |
+| Docker    | Containerization            |
+| Nexus     | Artifact Hosting            |
+| Terraform | Infrastructure Provisioning |
+| Ansible   | Environment Configuration   |
+| AWS EC2   | Cloud Deployment            |
 
 ---
 
-## 4. Memory Limits
+# 📸 Project Screenshots
 
-```bash
---memory=256m
-```
+Include screenshots of:
 
-Prevents memory abuse and resource exhaustion.
-
----
-
-## 5. Isolated Docker Runners
-
-Code executes inside isolated language-specific containers.
-
-Benefits:
-- Environment isolation
-- Safer execution
-- Better scalability
+* Terraform Apply
+* AWS EC2 Dashboard
+* Jenkins Pipeline Success
+* SonarQube Dashboard
+* Nexus Repository
+* DockerHub Image
+* Running Application
+* Ansible Playbook Success
 
 ---
 
-# Docker Runner Images
+# 🎯 Learning Outcomes
 
-## Python Runner
+This project demonstrates:
 
-```dockerfile
-FROM python:3.11-alpine
-
-RUN adduser -D sandboxuser
-
-USER sandboxuser
-
-WORKDIR /app
-```
+* Infrastructure as Code (IaC)
+* CI/CD Automation
+* Container Security
+* Cloud Deployment
+* DevOps Pipeline Management
+* Artifact Repository Integration
+* Automated Quality Analysis
 
 ---
 
-## Node.js Runner
+# 👨‍💻 Author
 
-```dockerfile
-FROM node:20-alpine
+## Komal Joshi
 
-RUN adduser -D sandboxuser
-
-USER sandboxuser
-
-WORKDIR /app
-```
-
----
-
-# Docker Compose
-
-Docker Compose orchestrates all services.
-
-## Services
-
-- API Container
-- Redis Container
-- Shared Docker Volume
-
----
-
-## Start All Services
-
-```bash
-docker compose up --build
-```
-
----
-
-# Automation Script
-
-The project includes a Bash automation CLI:
-
-```text
-scripts/manage.sh
-```
-
----
-
-# Available Commands
-
-## Setup
-
-```bash
-./scripts/manage.sh setup
-```
-
-Performs:
-- Docker verification
-- Docker Compose verification
-- Redis image pull
-- Temp directory setup
-
----
-
-## Build
-
-```bash
-./scripts/manage.sh build
-```
-
-Builds and tags all Docker images using the current Git commit hash.
-
----
-
-## Test
-
-```bash
-./scripts/manage.sh test
-```
-
-Runs:
-- Docker Compose startup
-- API integration tests
-- Python execution verification
-- JavaScript execution verification
-
----
-
-## Clean
-
-```bash
-./scripts/manage.sh clean
-```
-
-Performs cleanup:
-- Stops containers
-- Removes volumes
-- Removes temporary files
-
----
-
-## Logs
-
-```bash
-./scripts/manage.sh logs
-```
-
-Displays real-time container logs and highlights `ERROR` and `CRITICAL` messages.
-
----
-
-# Installation Guide
-
-## Prerequisites
-
-Install the following:
-
-- Docker Desktop
-- Node.js
-- Git Bash (Windows)
-- Git
-
----
-
-# Clone Repository
-
-```bash
-git clone <your-repository-url>
-```
-
----
-
-# Navigate to Project
-
-## Windows Git Bash
-
-```bash
-cd polyglot-sandbox-automator
-```
-
----
-
-# Install Dependencies
-
-```bash
-npm install
-```
-
----
-
-# Start Services
-
-```bash
-docker compose up --build
-```
-
----
-
-# Testing the API
-
-## PowerShell Example
-
-```powershell
-Invoke-RestMethod `
--Uri "http://localhost:3000/execute" `
--Method POST `
--ContentType "application/json" `
--Body '{"language":"python","code":"print(\"Hello World\")"}'
-```
-
----
-
-# Expected Output
-
-```json
-{
-  "output": "Hello World"
-}
-```
-
----
-
-# Git Workflow
-
-This project follows a feature-branch Git workflow.
-
-## Example Workflow
-
-```bash
-git checkout -b feature/docker-runners
-git add .
-git commit -m "Add Docker runner support"
-git push origin feature/docker-runners
-```
-
-This workflow helps isolate features, improve collaboration, and maintain clean version control practices.
-
----
-
-# Learning Objectives Covered
-
-This project demonstrates practical understanding of:
-
-- Backend API development
-- Docker containerization
-- Sandbox isolation
-- DevOps fundamentals
-- Docker Compose orchestration
-- Bash automation
-- Secure code execution
-- Infrastructure as Code
-- Multi-container communication
-
----
-
-# Future Improvements
-
-Potential future enhancements:
-
-- UUID-based temporary filenames
-- Automatic file cleanup after execution
-- Execution timeout handling
-- Redis-based caching
-- Rate limiting
-- Web frontend UI
-- Support for additional languages
-- Authentication system
-- Queue-based execution architecture
-
----
-
-# Screenshots
-
-## Docker Compose Running
-
-![Docker Compose](screenshots/docker-compose.png)
-
-## API Execution Test
-
-![API Test](screenshots/api-test.png)
-
-## manage.sh Test
-
-![Manage Script](screenshots/manage-test.png)
-
-## Project Structure
-
-![Project Structure](screenshots/project-structure.png)
-
----
-
-# Author
-
-Komal Joshi
-
-B.Tech CSE (2027)
-
+B.Tech CSE Student
 Lovely Professional University
 
 ---
 
-# Conclusion
+# 📜 License
 
-Polyglot Sandbox Automator is a secure, containerized code execution platform demonstrating practical backend engineering, Docker orchestration, sandbox isolation, automation, and DevOps concepts.
-
-The project successfully executes untrusted Python and JavaScript code inside isolated Docker runners using a scalable multi-container architecture.
+This project is developed for academic and educational purposes under PSA-2 DevOps coursework.
