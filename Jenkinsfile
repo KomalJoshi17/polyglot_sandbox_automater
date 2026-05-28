@@ -1,5 +1,9 @@
 pipeline {
-agent any
+agent {
+    docker {
+        image 'node:20'
+    }
+}
 
 environment {
     DOCKER_IMAGE = "komaljoshi17/polyglot-sandbox-automator"
