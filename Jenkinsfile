@@ -15,19 +15,19 @@ stages {
 
     stage('Install Dependencies') {
         steps {
-            bat 'npm install'
+            sh 'npm install'
         }
     }
 
     stage('Build Project') {
         steps {
-            bat 'npm run build'
+            sh 'npm run build'
         }
     }
 
     stage('Build Docker Image') {
         steps {
-            bat 'docker build -t %DOCKER_IMAGE% .'
+            sh 'docker build -t %DOCKER_IMAGE% .'
         }
     }
 
@@ -39,9 +39,9 @@ stages {
                 passwordVariable: 'DOCKER_PASS'
             )]) {
 
-                bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
+                sh 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
 
-                bat 'docker push %DOCKER_IMAGE%'
+                sh 'docker push %DOCKER_IMAGE%'
             }
         }
     }
