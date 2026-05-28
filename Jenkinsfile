@@ -21,8 +21,7 @@ pipeline {
                     sonar-scanner \
                     -Dsonar.projectKey=polyglot-sandbox-automator \
                     -Dsonar.sources=. \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.login=YOUR_SONAR_TOKEN
+                    -Dsonar.host.url=http://localhost:9000
                     '''
                 }
             }
@@ -38,21 +37,21 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'sudo docker build -t $DOCKER_IMAGE .'
+                sh 'docker build -t $DOCKER_IMAGE .'
             }
         }
 
         stage('Push DockerHub') {
             steps {
-                sh 'sudo docker push $DOCKER_IMAGE'
+                sh 'docker push $DOCKER_IMAGE'
             }
         }
 
         stage('Push Nexus') {
             steps {
                 sh '''
-                sudo docker tag $DOCKER_IMAGE $NEXUS_IMAGE
-                sudo docker push $NEXUS_IMAGE
+                docker tag $DOCKER_IMAGE $NEXUS_IMAGE
+                docker push $NEXUS_IMAGE
                 '''
             }
         }
@@ -60,10 +59,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''
-                sudo docker stop psa2-app || true
-                sudo docker rm psa2-app || true
+                docker stop psa2-app || true
+                docker rm psa2-app || true
 
-                sudo docker run -d -p 3000:3000 \
+                docker run -d -p 3000:3000 \
                 --name psa2-app \
                 $DOCKER_IMAGE
                 '''
