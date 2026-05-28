@@ -24,7 +24,7 @@ pipeline {
                 ${scannerHome}/bin/sonar-scanner \
                 -Dsonar.projectKey=polyglot-sandbox-automator \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://localhost:9000
+                -Dsonar.host.url=http://192.168.56.11:9000
                 """
             }
         }
