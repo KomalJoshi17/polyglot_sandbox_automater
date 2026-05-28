@@ -25,7 +25,7 @@ stages {
 
     stage('Build Project') {
         steps {
-            sh 'npm run build'
+            sh 'node node_modules/typescript/bin/tsc'
         }
     }
 
