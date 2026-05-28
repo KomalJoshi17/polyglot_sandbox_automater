@@ -16,17 +16,20 @@ pipeline {
         }
 
         stage('SonarQube Scan') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=polyglot-sandbox-automator \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://localhost:9000
-                    '''
-                }
+    steps {
+        script {
+            def scannerHome = tool 'SonarScanner'
+            withSonarQubeEnv('SonarQube') {
+                sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=polyglot-sandbox-automator \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://localhost:9000
+                """
             }
         }
+    }
+}
 
         stage('Quality Gate') {
             steps {
