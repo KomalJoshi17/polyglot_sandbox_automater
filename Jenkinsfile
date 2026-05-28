@@ -27,6 +27,22 @@ stages {
         }
     }
 
+    stage('SonarQube Analysis') {
+        steps {
+            withSonarQubeEnv('SonarQube') {
+                sh 'sonar-scanner'
+            }   
+        }
+    }
+
+    stage('Quality Gate') {
+        steps {
+            timeout(time: 2, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    }
+
     stage('Build Docker Image') {
         steps {
             sh 'docker build -t $DOCKER_IMAGE .'
