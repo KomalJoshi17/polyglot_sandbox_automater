@@ -9,7 +9,7 @@ stages {
 
     stage('Clone Repository') {
         steps {
-            git 'https://github.com/KomalJoshi17/polyglot_sandbox_automater.git'
+            git branch: 'main', url: 'https://github.com/KomalJoshi17/polyglot_sandbox_automater.git'
         }
     }
 
