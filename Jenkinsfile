@@ -1,7 +1,6 @@
 pipeline {
 agent any
 
-```
 environment {
     DOCKER_IMAGE = "komaljoshi17/polyglot-sandbox-automator"
 }
@@ -47,6 +46,5 @@ stages {
         }
     }
 }
-```
 
 }
